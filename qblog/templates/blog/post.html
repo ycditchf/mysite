@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+{% load django_markdown %}
+
+{% block blog_entries %}
+  <div class="post">
+    <h2><a href="{% url "article_detail" slug=object.slug %}">{{ object.title }}</a></h2>
+    <p class="meta">
+      {{ object.created.year }}年{{object.created.month}}月{{object.created.day}}日 |
+      标签： {{  object.tags.all|join:", " }}
+    </p>
+    {{ object.body|markdown }}
+  </div>
+  {% if object.get_previous_article %}
+    {% with previous=object.get_previous_article %}
+      <p class="previous-chapter">上一篇<a href="{{previous.get_absolute_url}}">{{previous}}</a></p>
+    {% endwith %}
+  {% endif %}
+  {% if object.get_next_article %}
+    {% with next=object.get_next_article %}
+      <p class="next-chapter">下一篇<a href="{{next.get_absolute_url}}">{{next}}</a></p>
+    {% endwith %}
+  {% endif %}
+
+  {% include "blog/comments.html" %}
+  
+{% endblock %}
+{% block side %}
+	{% include "blog/side.html" %}
+{% endblock %}
+

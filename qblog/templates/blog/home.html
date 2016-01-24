@@ -1,0 +1,53 @@
+{% extends "blog/base.html" %}
+{% load django_markdown %}
+
+
+{% block blog_entries %}
+{% if object_list|length > 0  %}
+{% for object in object_list %}
+<div class="post">
+    <h2><a href="{% url "article_detail" slug=object.slug %}">{{ object.title|title }}</a></h2>
+
+    <p class="meta">
+        {{ object.created.year }}年{{object.created.month}}月{{object.created.day}}日 |
+        <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>&nbsp;&nbsp;{{ object.tags.all|join:", " }} <!-- | 评论数：<span clsss="comment-count">0</span>-->
+       <!--
+        <span class="tag-list">
+         {% for tag in object.tags.all %}
+        	<span class="label label-default">{{tag}}</span>
+        {% endfor %}
+        </span>
+        -->
+        
+        
+    </p>
+    {{ object.body|truncatewords_html:20|markdown}}
+    <a class="link-readmore" href="{% url "article_detail" slug=object.slug %}">阅读全文</a>
+</div>
+{% endfor %}
+{% else %}
+<div class="post">
+    <em>抱歉，您访问的文章不存在</em>
+</div>
+{% endif %}
+
+{% endblock %}
+
+
+{% block side %}
+{% include "blog/side.html" %}
+{% endblock %}
+
+
+{% block blog_footer %}
+
+<script >
+    
+    $(document).ready(function(){
+        //导航
+        // $(".blog-nav a").removeClass('active');
+        $(".blog-nav a").eq(0).removeClass().addClass('blog-nav-item active');
+    });
+
+</script>
+{% endblock %}

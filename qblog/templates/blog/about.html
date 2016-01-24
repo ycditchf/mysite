@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+
+
+
+{% block blog_entries %}
+
+<h2>
+	<h3>建站原由</h3>
+	<p>从毕业到现在工作虽然已有5年多了，但是时常回顾过去自己所掌握的东西的时候，总是觉得知之甚少。而自己在整理资料的时候，发现其实学的东西还是蛮多的，只是忘记的太多了，所有希望能有个这样的博客，一方面来记录自己所学习的东西，同时也是在检查自己是否掌握了；另一方面希望和更多的人来交流，共同提高技术水平</p>
+	<p>所以接下来，要开始整理所学过的东西，一一记录下来</p>
+	<p>2016年1月4</p>
+</h2>
+
+
+
+{% endblock %}
+
+{% block side %}
+	{% include "blog/side.html" %}
+{% endblock %}
+
+ {% block blog_footer %}
+ <script type="text/javascript">
+  $(document).ready(function(){
+   // $(".blog-nav a").removeClass("active");
+    $(".blog-nav a").eq(2).removeClass().addClass("blog-nav-item active");
+    // $(".blog-nav a:eq(2)").removeClass().addClass("active");
+    // $("[href='/about/']").removeClass().addClass("active");
+  })
+</script>
+{% endblock %}

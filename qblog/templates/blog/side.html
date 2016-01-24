@@ -1,0 +1,54 @@
+{% block side %}
+	
+	<div class="sidebar-module-inset-zero">
+		<form id="search" role="search" method="get" class="search-form" action="/search/">
+			<input value="" name="search_text" class="search-field" placeholder="搜索" type="text">
+			<!-- <div class="clearfix"></div> -->
+		</form>
+	</div>
+	<div class="sidebar-module sidebar-module-inset">
+		<h4>最新文章</h4>
+		<ol class="list-unstyled">			
+			{% for article in recently_articles %}
+				<li><a href="{% url "article_detail" slug=article.slug %}">{{ article.title }}</a></li>
+			{% endfor %}			
+		</ol>
+	</div>
+	<div class="sidebar-module sidebar-module-inset">
+		<h4>分类</h4>
+		<ol class="list-unstyled">
+			{% if classification_list %} 
+				{% for name, count in classification_list %}
+					<li><a href="{% url "articleClassification" name=name %}">{{ name }}({{ count }})</a></li>
+				{% endfor %}
+			{% endif %}
+		</ol>
+	</div>
+	<div class="sidebar-module sidebar-module-inset">
+		<h4>标签</h4>
+		<ol class="list-unstyled">
+			{% if tag_list %} 
+				{% for name, count in tag_list %}
+					<li><a href="{% url "articleTag" name=name %}">{{ name }}({{ count }})</a></li>
+				{% endfor %}
+			{% endif %}
+		</ol>
+	</div>
+	<div class="sidebar-module sidebar-module-inset">
+		<h4>归档</h4>
+		<ol class="list-unstyled">
+			{% if archives_month %} 
+				{% for time, count in archives_month %}
+					<li><a href="{% url "archive_month" year=time.year month=time.month %}">{{time|date:"F Y"}}({{ count }})</a></li>
+					<!-- {{ time.year }}年{{ time.month }}月 -->
+				{% endfor %}
+			{% endif %} 
+		</ol>
+	</div>
+	<div class="sidebar-module sidebar-module-inset">
+		<h4>友情链接</h4>
+		<ol class="list-unstyled">
+			<li><a target="_blank" href="https://github.com/ycditchf"><i class="fa fa-github"></i> GitHub</a></li>
+		</ol>
+	</div>
+{% endblock %}

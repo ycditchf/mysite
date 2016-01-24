@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %}
+{% load django_markdown %}
+
+
+{% block blog_entries %}
+		{% for key, value in object_list.items %}
+		  <div class="post">
+		  	<h3>{{key.year}}年</h3>
+		  	<ol>
+		  		{% for article in value %}
+		  			<li><a href="{{article.get_absolute_url}}">{{article.modified.year}}年{{article.modified.month}}月{{article.modified.day}}日&nbsp;{{ article.title }}</a></li>
+		  		{% endfor %}
+		  	</ol>
+		  </div>
+		{% endfor %}
+
+	
+{% endblock %}
+
+
+{% block side %}
+	{% include "blog/side.html" %}
+{% endblock %}
+
+
+{% block blog_footer %}
+ <script>
+  $(document).ready(function(){
+    // $(".blog-nav a").removeClass('active');
+    $(".blog-nav a").eq(1).removeClass().addClass('blog-nav-item active');
+  })
+</script>
+{% endblock %}
