@@ -51,6 +51,12 @@ h6, .h6 {
     border: 1px solid #337AB7;
     border-radius: 20px;
 }
+img {
+    border: 0;
+    max-width: 100%;
+    height: auto;
+}
+
 button, input, select, textarea {
     font-family: inherit;
     font-size: 100%;
